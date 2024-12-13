@@ -73,7 +73,3 @@ elif choice == "Transform Image":
 elif choice == "About Us":
     st.title("About Us")
     st.write("Group 5 consists of students from President University who have worked together on this project for Linear Algebra. Our focus is on image processing techniques and transformations.")
-
-# Run the app
-if __name__ == "__main__":
-    st.run()
