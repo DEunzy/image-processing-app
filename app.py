@@ -15,7 +15,8 @@ def apply_transformations(img, rotation, scale, translate, skew):
     img = img.resize((int(width * scale), int(height * scale)))
     
     # Translation
-    img = ImageOps.offset(img, translate[0], translate[1])
+    translate_matrix = (1, 0, translate[0], 0, 1, translate[1])
+    img = img.transform(img.size, Image.AFFINE, translate_matrix)
     
     # Skewing
     skew_matrix = (1, skew[0], 0, skew[1], 1, 0)
