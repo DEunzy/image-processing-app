@@ -73,3 +73,12 @@ elif choice == "Transform Image":
 elif choice == "About Us":
     st.title("About Us")
     st.write("Group 5 consists of students from President University who have worked together on this project for Linear Algebra. Our focus is on image processing techniques and transformations.")
+    
+    # Group members with clickable names to show pictures
+    st.subheader("Group Members")
+    
+    if st.button("Abdulloh Dzaka (004202305027)"):
+        st.image("abdulloh_dzaka.png", caption="Abdulloh Dzaka")
+
+    if st.button("Mikhael Andwadiwana (004202305076)"):
+        st.image("mikhael_andwadiwana.png", caption="Mikhael Andwadiwana")
