@@ -35,8 +35,8 @@ choice = st.sidebar.selectbox("Menu", menu)
 
 if choice == "Home":
     st.title("Linear Algebra Group 5")
-    st.subheader("Welcome to Group 5's Project on Image Processing!")
-    st.write("Delve into the creative world of image processing, brought to you by the ingenious minds of Group 5. Explore our project to understand the transformations and techniques we have implemented to manipulate and enhance images.")
+    st.subheader("Welcome to our Image Processing Project")
+    st.write("Explore the transformations and techniques we used to manipulate and enhance images.")
     
 elif choice == "Transform Image":
     st.title("Transform Your Image")
@@ -72,7 +72,7 @@ elif choice == "Transform Image":
 
 elif choice == "About Us":
     st.title("About Us")
-    st.write("Group 5 comprises dedicated students from President University. Our collaborative efforts in the field of Linear Algebra have culminated in this fascinating project on image processing. Discover the faces behind the project and learn more about our individual contributions.")
+    st.write("We are Group 5 from President University, working on a project in Linear Algebra focusing on image processing. Meet the team members who made this project possible.")
     
     # Group members with clickable names to show pictures
     st.subheader("Group Members")
