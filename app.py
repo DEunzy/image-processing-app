@@ -2,6 +2,9 @@ import streamlit as st
 from PIL import Image, ImageEnhance, ImageOps
 import numpy as np
 
+# Load the logo image
+logo = Image.open("president_university_logo.png")
+
 # Function to apply transformations
 def apply_transformations(img, rotation, scale, translate, skew):
     # Rotation
@@ -19,6 +22,9 @@ def apply_transformations(img, rotation, scale, translate, skew):
     img = img.transform(img.size, Image.AFFINE, skew_matrix)
     
     return img
+
+# Display the logo at the top
+st.image(logo, width=100, caption='President University Logo')
 
 # Title
 st.title("Transform Your Image")
