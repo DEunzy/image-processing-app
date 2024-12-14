@@ -55,11 +55,12 @@ def get_image_download_link(img, filename, text):
 # Create a menu with multiple pages
 menu = ["Home", "Transform Image", "About Us"]
 
-# Display the logo at the top
-st.image(logo, width=100, caption='President University Logo')
-
 # Sidebar navigation
-choice = st.sidebar.selectbox("Menu", menu)
+st.sidebar.title("Navigation")
+choice = st.sidebar.radio("Go to", menu)
+
+# Display the logo at the top
+st.sidebar.image(logo, width=100, caption='President University Logo')
 
 if choice == "Home":
     st.title("Linear Algebra Group 5")
@@ -78,33 +79,33 @@ elif choice == "Transform Image":
         image = Image.open(uploaded_file)
         st.image(image, caption='Uploaded Image.', use_column_width=True)
         
-        # Rotation slider
-        rotation = st.slider("Rotation", 0, 360, 0)
+        # Rotation slider with tooltip
+        rotation = st.slider("Rotation", 0, 360, 0, help="Rotate the image in degrees.")
         
-        # Scaling slider
-        scale = st.slider("Scale", 0.1, 3.0, 1.0)
+        # Scaling slider with tooltip
+        scale = st.slider("Scale", 0.1, 3.0, 1.0, help="Scale the image size.")
         
-        # Translation sliders
-        translate_x = st.slider("Translate X", -100, 100, 0)
-        translate_y = st.slider("Translate Y", -100, 100, 0)
+        # Translation sliders with tooltip
+        translate_x = st.slider("Translate X", -100, 100, 0, help="Translate the image horizontally.")
+        translate_y = st.slider("Translate Y", -100, 100, 0, help="Translate the image vertically.")
         
-        # Skewing sliders
-        skew_x = st.slider("Skew X", -1.0, 1.0, 0.0)
-        skew_y = st.slider("Skew Y", -1.0, 1.0, 0.0)
+        # Skewing sliders with tooltip
+        skew_x = st.slider("Skew X", -1.0, 1.0, 0.0, help="Skew the image horizontally.")
+        skew_y = st.slider("Skew Y", -1.0, 1.0, 0.0, help="Skew the image vertically.")
         
-        # Brightness slider
-        brightness = st.slider("Brightness", 0.1, 2.0, 1.0)
+        # Brightness slider with tooltip
+        brightness = st.slider("Brightness", 0.1, 2.0, 1.0, help="Adjust the brightness of the image.")
         
-        # Contrast slider
-        contrast = st.slider("Contrast", 0.1, 2.0, 1.0)
+        # Contrast slider with tooltip
+        contrast = st.slider("Contrast", 0.1, 2.0, 1.0, help="Adjust the contrast of the image.")
         
-        # Filter type
-        filter_type = st.selectbox("Select Filter", ["None", "Grayscale", "Sepia", "Negative"])
+        # Filter type with tooltip
+        filter_type = st.selectbox("Select Filter", ["None", "Grayscale", "Sepia", "Negative"], help="Apply a filter to the image.")
         
         # Apply transformations
         transformed_image = apply_transformations(image, rotation, scale, (translate_x, translate_y), (skew_x, skew_y), brightness, contrast, filter_type)
         
-        # Display enhanced image
+        # Display enhanced image with side-by-side preview
         st.image(transformed_image, caption='Transformed Image.', use_column_width=True)
 
         # Add download button
