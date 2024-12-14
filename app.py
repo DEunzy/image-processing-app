@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image, ImageEnhance, ImageOps, ImageDraw
+from PIL import Image, ImageEnhance, ImageOps
 import numpy as np
 from io import BytesIO
 
@@ -7,7 +7,7 @@ from io import BytesIO
 logo = Image.open("president_university_logo.png")
 
 # Function to apply transformations
-def apply_transformations(img, rotation, scale, translate, skew, brightness, contrast, filter_type):
+def apply_transformations(img, rotation, scale, translate, skew):
     # Rotation
     img = img.rotate(rotation, expand=True)
     
@@ -22,25 +22,6 @@ def apply_transformations(img, rotation, scale, translate, skew, brightness, con
     # Skewing
     skew_matrix = (1, skew[0], 0, skew[1], 1, 0)
     img = img.transform(img.size, Image.AFFINE, skew_matrix)
-    
-    # Brightness Adjustment
-    brightness_enhancer = ImageEnhance.Brightness(img)
-    img = brightness_enhancer.enhance(brightness)
-    
-    # Contrast Adjustment
-    contrast_enhancer = ImageEnhance.Contrast(img)
-    img = contrast_enhancer.enhance(contrast)
-    
-    # Apply Filters
-    if filter_type == "Grayscale":
-        img = ImageOps.grayscale(img)
-    elif filter_type == "Sepia":
-        sepia = np.array(img.convert("RGB"))
-        sepia = sepia.dot([0.393, 0.769, 0.189, 0.349, 0.686, 0.168, 0.272, 0.534, 0.131])
-        sepia[sepia > 255] = 255
-        img = Image.fromarray(sepia.astype('uint8'))
-    elif filter_type == "Negative":
-        img = ImageOps.invert(img.convert("RGB"))
     
     return img
 
@@ -92,17 +73,8 @@ elif choice == "Transform Image":
         skew_x = st.slider("Skew X", -1.0, 1.0, 0.0)
         skew_y = st.slider("Skew Y", -1.0, 1.0, 0.0)
         
-        # Brightness slider
-        brightness = st.slider("Brightness", 0.1, 2.0, 1.0)
-        
-        # Contrast slider
-        contrast = st.slider("Contrast", 0.1, 2.0, 1.0)
-        
-        # Filter type
-        filter_type = st.selectbox("Select Filter", ["None", "Grayscale", "Sepia", "Negative"])
-        
         # Apply transformations
-        transformed_image = apply_transformations(image, rotation, scale, (translate_x, translate_y), (skew_x, skew_y), brightness, contrast, filter_type)
+        transformed_image = apply_transformations(image, rotation, scale, (translate_x, translate_y), (skew_x, skew_y))
         
         # Display enhanced image
         st.image(transformed_image, caption='Transformed Image.', use_column_width=True)
