@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image, ImageEnhance, ImageOps
 import numpy as np
+from io import BytesIO
 
 # Load the logo image
 logo = Image.open("president_university_logo.png")
@@ -23,6 +24,14 @@ def apply_transformations(img, rotation, scale, translate, skew):
     img = img.transform(img.size, Image.AFFINE, skew_matrix)
     
     return img
+
+# Function to convert image to bytes
+def get_image_download_link(img, filename, text):
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = buffered.getvalue()
+    btn = st.download_button(label=text, data=img_str, file_name=filename, mime="image/png")
+    return btn
 
 # Create a menu with multiple pages
 menu = ["Home", "Transform Image", "About Us"]
@@ -69,6 +78,9 @@ elif choice == "Transform Image":
         
         # Display enhanced image
         st.image(transformed_image, caption='Transformed Image.', use_column_width=True)
+
+        # Add download button
+        get_image_download_link(transformed_image, "transformed_image.png", "Download Transformed Image")
 
 elif choice == "About Us":
     st.title("About Us")
